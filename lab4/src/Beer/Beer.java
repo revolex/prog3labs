@@ -1,10 +1,12 @@
 package Beer;
 
-public class Beer {
+import java.io.Serializable;
+
+public class Beer implements Serializable {
     String name,style;
     double strength;
 
-    public Beer(String n, String s, double f){
+    public Beer(String n, String s, double f) {
         name=n;
         style=s;
         strength=f;
