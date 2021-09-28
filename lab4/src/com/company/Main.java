@@ -17,7 +17,7 @@ public class Main {
         while(true) {
             String olvasott[] = be.readLine().split(" ");
 
-            if (olvasott[0].equals(new String("exit")))
+            if (olvasott[0].equals("exit"))
                 System.exit(0);
 
             if (olvasott[0].equals("add")) add(new Beer(olvasott[1], olvasott[2], Double.parseDouble(olvasott[3])));
