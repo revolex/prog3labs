@@ -7,8 +7,17 @@ import java.util.ArrayList;
 enum direction{U,D,L,R};
 
 public class Snake implements Serializable {
+    /**
+     * a kígyó hossza, élete és megevett almáinak száma
+     */
     int size,life,applesEaten;
+    /**
+     * Kígyó teste
+     */
     ArrayList<Point> body;
+    /**
+     * Kígyó iránya
+     */
     direction dir;
 
 
@@ -111,16 +120,33 @@ public class Snake implements Serializable {
     public int getLife(){
         return life;
     }
+
+    /**
+     * Visszaadja a kígyó irányát
+     * @return dir
+     */
+    public direction getDir() { return dir; }
+
+    /**
+     * Visszaadja kígyó testét
+     * @return body
+     */
+    public ArrayList<Point> getBody(){return body;}
+
+    /**
+     * Beállítja a kígyó hosszát.
+     * @param s új érték
+     */
+    public void setSize(int s){size=s;}
+
     /**
      * Megnézzük, hogy a kígyó ütközött-e önmagával úgy,
      * hogy megnézzük a fej koordinátái egyenlő-e a testének
      * bármely koordinátájával, ha igen, akkor meghívjuk a loseTail függvényt.
      * Ha nem ütközött magával, akkor megnézzük,
      * hogy a falakkal ütközött-e, ha igen akkor 0-ra csökkentjük az életét
-     * @param w A játékterület szélessége
-     * @param h A játékterület magassága
      */
-    public void checkCollision(int w, int h){
+    public void checkCollision(){
         Point head = body.get(0);
         for (int i =1;i<size;i++){
             Point bodyPart = body.get(i);
@@ -131,7 +157,7 @@ public class Snake implements Serializable {
         }
         int x = head.getX();
         int y = head.getY();
-        if(x<0||x>w||y<0||y>h)
+        if(x<0||x>Board.w-Board.unitsize||y<0||y>Board.h-Board.unitsize)
             life = 0;
     }
 
@@ -143,8 +169,8 @@ public class Snake implements Serializable {
      * @param first az első rész amit levágunk a kígyóról.
      * @return
      */
-    private boolean loseTail(int first){
-        if (size > first) {
+    public boolean loseTail(int first){
+        if (size >= first) {
             body.subList(first, size).clear();
             size=first;
             return true;

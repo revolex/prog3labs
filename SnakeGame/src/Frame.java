@@ -2,6 +2,10 @@ import javax.swing.JFrame;
 
 public class Frame extends JFrame {
     Board board;
+
+    /**
+     * Játék frame-je
+     */
     Frame(){
         board = new Board();
         this.add(board);
